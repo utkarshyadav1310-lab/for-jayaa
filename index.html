@@ -225,63 +225,18 @@ has taught me how.
 </div>
 
 <script>
-// BACKGROUND WORDS
-const words = ["Jaya", "Love", "Patrakar"];
-const bg = document.getElementById("bgText");
+document.getElementById("countdownScreen").classList.add("hidden");
+document.getElementById("birthdayScreen").classList.remove("hidden");
 
-for (let i = 0; i < 45; i++) {
-    const span = document.createElement("span");
-    span.textContent = words[i % words.length];
-    span.style.left = Math.random() * 100 + "vw";
-    span.style.animationDuration = 20 + Math.random() * 30 + "s";
-    span.style.fontSize = 3 + Math.random() * 3 + "rem";
-    span.style.animationDelay = Math.random() * 20 + "s";
-    bg.appendChild(span);
+for (let i = 0; i < 300; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.backgroundColor = `hsl(${Math.random()*360},70%,70%)`;
+    c.style.animationDuration = 2 + Math.random() * 4 + "s";
+    document.body.appendChild(c);
 }
 
-// COUNTDOWN (AUTO FIX)
-const now = new Date();
-let birthday = new Date(now.getFullYear(), 0, 10, 0, 0, 0);
-if (now >= birthday) birthday = now;
-
-const countdownEl = document.getElementById("countdown");
-const countdownScreen = document.getElementById("countdownScreen");
-const birthdayScreen = document.getElementById("birthdayScreen");
-
-function updateCountdown() {
-    const diff = birthday - new Date();
-    if (diff <= 0) {
-        launchBirthday();
-        return;
-    }
-    const h = Math.floor(diff / (1000 * 60 * 60));
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-    countdownEl.textContent =
-        `${h.toString().padStart(2,'0')} : ${m.toString().padStart(2,'0')} : ${s.toString().padStart(2,'0')}`;
-}
-
-function launchBirthday() {
-    countdownScreen.classList.add("hidden");
-    birthdayScreen.classList.remove("hidden");
-    startConfetti();
-    clearInterval(timer);
-}
-
-function startConfetti() {
-    for (let i = 0; i < 300; i++) {
-        const c = document.createElement("div");
-        c.className = "confetti";
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.backgroundColor = `hsl(${Math.random()*360},70%,70%)`;
-        c.style.animationDuration = 2 + Math.random() * 4 + "s";
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 6000);
-    }
-}
-
-const timer = setInterval(updateCountdown, 1000);
-updateCountdown();
 </script>
 
 </body>
